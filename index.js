@@ -37,4 +37,11 @@ app.post('/findBookZlibrary', urlencodedParser, function (request, response) {
 	response.end();
 });
 
+app.post('/findBookArchive', urlencodedParser, function (request, response) {
+	console.log("Finding book on archive (" + request.body.bookTitle + ") ...");
+	response.redirect('//archive.org/details/texts?query=' + request.body.bookTitle);
+	response.end();
+});
+
+
 app.listen(8000);
