@@ -21,6 +21,7 @@
         <br/>
         
         <div class="container">
+        
             <div class="box">
                 <img src="/assets/image/4chan-logo.png" width=128 />
                 <hr />
@@ -34,6 +35,7 @@
                     </div>
                 </form>
             </div>
+            
             <div class="box">
                 <img src="/assets/image/reddit-logo.png" width=128 />
                 <p class="tag"><i>(replace beginning of url with old.reddit.com)</i></p>
@@ -48,7 +50,41 @@
                     </div>
                 </form>
             </div>
-            <!--<h1>4chan</h1>-->
+            
+            <div class="box">
+                <div class="columns">
+                
+                <div class="column">
+                <img src="/assets/image/libgen.png" width=128 />
+                <p class="tag">libgen.fun</p>
+                <hr />
+                <form action="/findBookLibgen" method="POST" class="field has-addons">
+                    <div class="control">
+                        <input required placeholder="book title" name="bookTitle" id="bookTitle" class="input">
+                    </div>
+                    <div class="control">
+                        <button class="button" type="submit">find</button>
+                    </div>
+                </form>
+                </div>
+                
+                <div class="column">
+                <img src="/assets/image/zlibrary.png" width=128 />
+                <p class="tag">1lib.us</p>
+                <hr />
+                <form action="/findBookZlibrary" method="POST" class="field has-addons">
+                    <div class="control">
+                        <input required placeholder="book title" name="bookTitle" id="bookTitle" class="input">
+                    </div>
+                    <div class="control">
+                        <button class="button" type="submit">find</button>
+                    </div>
+                </form>
+                </div>
+                
+                </div>
+            </div>
+            <!--<h1>4chan</h1> https://libgen.fun/search.php?req=-->
         </div>
     </section>
 
