@@ -1,53 +1,56 @@
 <!DOCTYPE html>
 <html>
-	<head lang="en">
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>web scraper</title>
-		<link rel="stylesheet" href="/assets/css/bulma.min.css"/>
-		<link rel="stylesheet" type="text/css" href="/assets/css/main.css"/>
-		<!--<script type="text/javascript" src="4chan.js"></script>-->
-    </head>
-	<body>
-		<section class="section">
-			<div class="container">
-				<div class="box">
-					<img src="/assets/image/4chan-logo.png" width=128  />
-					<hr/>
-					<form action="/scrapeChan" method="POST" class="field has-addons">
-						<!--<label for="fullUrl" class="sr-only">thread</label>-->
-						<div class="control">
-							<input required placeholder="thread url" type="url" name="fullUrl" id="fullUrl" class="input">
-                        </div>
-						<div class="control">
-							<button class="button" type="submit">scrape</button>
-                        </div>
-                    </form>
-                </div>
-				<div class="box">
-					<img src="/assets/image/reddit-logo.png" width=128  />
-					<hr/>
-					<form action="/scrapeReddit" method="POST" class="field has-addons">
-						<!--<label for="fullUrl" class="sr-only">thread</label>-->
-						<div class="control">
-							<input required placeholder="subreddit url" type="url" name="fullUrl" id="fullUrl" class="input">
-                        </div>
-						<div class="control">
-							<button class="button" type="submit">scrape</button>
-                        </div>
-						<div class="control">
-							<p class="button is-static">(replace beginning of url with old.reddit.com)</button>
-                        </div>
-                    </form>
-                </div>
-				<!--<h1>4chan</h1>-->
+
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>web scraper</title>
+    <link rel="stylesheet" href="/assets/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+    <!--<script type="text/javascript" src="4chan.js"></script>-->
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="box">
+                <img src="/assets/image/4chan-logo.png" width=128 />
+                <hr />
+                <form action="/scrapeChan" method="POST" class="field has-addons">
+                    <!--<label for="fullUrl" class="sr-only">thread</label>-->
+                    <div class="control">
+                        <input required placeholder="thread url" type="url" name="fullUrl" id="fullUrl" class="input">
+                    </div>
+                    <div class="control">
+                        <button class="button" type="submit">scrape</button>
+                    </div>
+                </form>
             </div>
-			
-			<div class="container has-text-centered is-centered">
-				<h1>web scraper 1.0.0 - by noil</h1>
+            <div class="box">
+                <img src="/assets/image/reddit-logo.png" width=128 />
+                <hr />
+                <form action="/scrapeReddit" method="POST" class="field has-addons">
+                    <!--<label for="fullUrl" class="sr-only">thread</label>-->
+                    <div class="control">
+                        <input required placeholder="subreddit url" type="url" name="fullUrl" id="fullUrl" class="input">
+                    </div>
+                    <div class="control">
+                        <button class="button" type="submit">scrape</button>
+                    </div>
+                    <div class="control">
+                        <p class="button is-static">(replace beginning of url with old.reddit.com)</button>
+                    </div>
+                </form>
             </div>
-        </section>
-		
-		<!--<h1>reddit</h1>  style="float:left;"  -->
-    </body>
+            <!--<h1>4chan</h1>-->
+        </div>
+
+        <div class="container has-text-centered is-centered">
+            <h1>web scraper 1.0.0 - by noil</h1>
+        </div>
+    </section>
+
+    <!--<h1>reddit</h1>  style="float:left;"  -->
+</body>
+
 </html>
