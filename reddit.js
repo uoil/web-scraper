@@ -11,7 +11,7 @@ function scrape(_redditUrl) {
         getData(response.data)
 		}).catch(error => {
         console.log(error)
-	});
+    });
 }
 
 let getData = html => {
@@ -19,17 +19,17 @@ let getData = html => {
     const $ = cheerio.load(html);
     $('div.link').each((i, elem) => {
 		let dataUrl = $(elem).attr('data-url');
-		if (!dataUrl.includes("i.redd.it"))
+        if (!dataUrl.includes("i.redd.it"))
 		return;
 		
         data.push({
 			link : dataUrl
-		});
+        });
 		
 		let subUrl = redditUrl.substr((redditUrl.lastIndexOf('/') + 1));
 		fs.mkdir("images/" + subUrl, { recursive: true }, (err) => {
 			if (err) throw err;
-		});
+        });
 		
         axios({
             method: 'get',
@@ -42,14 +42,14 @@ let getData = html => {
             response.data.pipe(fs.createWriteStream("images/" + subUrl + "/" + imageName))
 			}).catch(error => {
 			console.log('error: ', error)
-		});
-	});
-console.log(data);
+        });
+    });
+    console.log(data);
 }
 
 exports.scrape = scrape;
 /*
-module.exports = {
-scrape
-}
+    module.exports = {
+    scrape
+    }
 */

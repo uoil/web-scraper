@@ -11,7 +11,7 @@ function scrape(_chanUrl) {
         getData(response.data)
 		}).catch(error => {
         console.log(error)
-	});
+    });
 }
 
 let getData = html => {
@@ -20,25 +20,25 @@ let getData = html => {
     $('a.fileThumb').each((i, elem) => {
         data.push({
 			link : $(elem).attr('href')
-		});
+        });
 		
 		let threadUrl = chanUrl.substr((chanUrl.lastIndexOf('/') + 1));
 		fs.mkdir("images/" + threadUrl, { recursive: true }, (err) => {
 			if (err) throw err;
-		});
+        });
 		
         axios({
             method: 'get',
             url: "https:" + $(elem).attr('href'),
             responseType: 'stream'
-		})
+        })
 		.then(function (response) {
 			let href = $(elem).attr('href');
 			let extension = href.substr((href.lastIndexOf('.') + 1));
             let imageName = Math.floor(Math.random() * 1000000000) + '.' + extension;
             response.data.pipe(fs.createWriteStream("images/" + threadUrl + "/" + imageName))
-		});
-	});
+        });
+    });
 }
 
 exports.scrape = scrape;
