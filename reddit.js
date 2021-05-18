@@ -9,9 +9,9 @@ function scrape(_redditUrl) {
 	
 	axios.get(redditUrl).then(response => {
         getData(response.data)
-    }).catch(error => {
+		}).catch(error => {
         console.log(error)
-    });
+	});
 }
 
 let getData = html => {
@@ -20,12 +20,12 @@ let getData = html => {
     $('div.link').each((i, elem) => {
 		let dataUrl = $(elem).attr('data-url');
 		if (!dataUrl.includes("i.redd.it"))
-			return;
-
+		return;
+		
         data.push({
-          link : dataUrl
-        });
-
+			link : dataUrl
+		});
+		
 		let subUrl = redditUrl.substr((redditUrl.lastIndexOf('/') + 1));
 		fs.mkdir("images/" + subUrl, { recursive: true }, (err) => {
 			if (err) throw err;
@@ -35,21 +35,21 @@ let getData = html => {
             method: 'get',
             url: dataUrl,
             responseType: 'stream'
-        }).then(function (response) {
+			}).then(function (response) {
 			let href = dataUrl;
 			let extension = href.substr((href.lastIndexOf('.') + 1));
             let imageName = Math.floor(Math.random() * 1000000000) + '.' + extension;
             response.data.pipe(fs.createWriteStream("images/" + subUrl + "/" + imageName))
-        }).catch(error => {
+			}).catch(error => {
 			console.log('error: ', error)
 		});
-    });
-    console.log(data);
+	});
+console.log(data);
 }
 
 exports.scrape = scrape;
 /*
 module.exports = {
-    scrape
+scrape
 }
 */
