@@ -12,6 +12,14 @@
 
 <body>
     <section class="section">
+        <div class="container has-text-centered is-centered">
+            <h1 class="tag">web scraper</h1>
+            <h1 class="tag">1.0.0</h1>
+            <h1 class="tag">created by noil</h1>
+        </div>
+        
+        <br/>
+        
         <div class="container">
             <div class="box">
                 <img src="/assets/image/4chan-logo.png" width=128 />
@@ -28,6 +36,7 @@
             </div>
             <div class="box">
                 <img src="/assets/image/reddit-logo.png" width=128 />
+                <p class="tag"><i>(replace beginning of url with old.reddit.com)</i></p>
                 <hr />
                 <form action="/scrapeReddit" method="POST" class="field has-addons">
                     <!--<label for="fullUrl" class="sr-only">thread</label>-->
@@ -37,16 +46,9 @@
                     <div class="control">
                         <button class="button" type="submit">scrape</button>
                     </div>
-                    <div class="control">
-                        <p class="button is-static">(replace beginning of url with old.reddit.com)</button>
-                    </div>
                 </form>
             </div>
             <!--<h1>4chan</h1>-->
-        </div>
-
-        <div class="container has-text-centered is-centered">
-            <h1>web scraper 1.0.0 - by noil</h1>
         </div>
     </section>
 
