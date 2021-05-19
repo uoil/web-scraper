@@ -1,8 +1,7 @@
 html {
-    background-image: url("/assets/image/bg.jpg");
     background-position: center center;
-    background-repeat: no-repeat;
+    background-repeat: round;
     background-attachment: fixed;
-    background-size: cover;
-    background-color: #999;
+    background-size: 10%;
+    background-color: #eeeeee;
 }
