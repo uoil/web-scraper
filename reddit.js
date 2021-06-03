@@ -1,8 +1,26 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
+const dom = require('linkedom');
 
 var redditUrl = '';
+var redditUrlUnlock = '';
+
+function unlock(_redditUrlUnlock) {
+    redditUrlUnlock = _redditUrlUnlock.replace(/\/+$/, ''); // remove trailing slash
+
+    axios.get(redditUrlUnlock).then(response => {
+        const {
+          window, document, customElements,
+          HTMLElement,
+          Event, CustomEvent
+        } = dom.parseHTML(response.data);
+        const button = document.querySelectorAll("button.c-btn.c-btn-primary")[1];
+        button.click();
+    }).catch(error => {
+        console.log(error)
+    });
+}
 
 function scrape(_redditUrl) {
     redditUrl = _redditUrl.replace(/\/+$/, ''); // remove trailing slash
@@ -49,6 +67,7 @@ let getData = html => {
     console.log(data);
 }
 
+exports.unlock = unlock;
 exports.scrape = scrape;
 /*
     module.exports = {

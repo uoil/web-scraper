@@ -25,10 +25,19 @@
             <div class="box">
                 <img src="/assets/image/4chan-logo.png" width=128 />
                 <hr />
-                <form action="/scrapeChan" method="POST" class="field has-addons">
+                <form action="/scrapeChanThread" method="POST" class="field has-addons">
                     <!--<label for="fullUrl" class="sr-only">thread</label>-->
                     <div class="control">
-                        <input required placeholder="thread url" type="url" name="fullUrl" id="fullUrl" class="input">
+                        <input required placeholder="thread url" name="fullUrl" id="fullUrl" class="input">
+                    </div>
+                    <div class="control">
+                        <button class="button" type="submit">scrape</button>
+                    </div>
+                </form>
+                <form action="/scrapeChanBoard" method="POST" class="field has-addons">
+                    <!--<label for="fullUrl" class="sr-only">thread</label>-->
+                    <div class="control">
+                        <input required placeholder="board url" name="fullUrl" id="fullUrl" class="input">
                     </div>
                     <div class="control">
                         <button class="button" type="submit">scrape</button>
@@ -43,7 +52,7 @@
                 <form action="/scrapeReddit" method="POST" class="field has-addons">
                     <!--<label for="fullUrl" class="sr-only">thread</label>-->
                     <div class="control">
-                        <input required placeholder="subreddit url" type="url" name="fullUrl" id="fullUrl" class="input">
+                        <input required placeholder="subreddit url" name="fullUrl" id="fullUrl" class="input">
                     </div>
                     <div class="control">
                         <button class="button" type="submit">scrape</button>

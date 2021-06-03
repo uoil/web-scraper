@@ -3,5 +3,6 @@ html {
     background-repeat: round;
     background-attachment: fixed;
     background-size: 10%;
-    background-color: #eeeeee;
+    background-image: linear-gradient(#eeeeee, #cccccc);
+    background-color: #cccccc;
 }

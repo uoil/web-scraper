@@ -2,27 +2,38 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 
-var chanUrl = '';
+var chanThreadUrl = '';
+var chanBoardUrl = '';
 
-function scrape(_chanUrl) {
-    chanUrl = _chanUrl.replace(/\/+$/, ''); // remove trailing slash
-
-    axios.get(chanUrl).then(response => {
-        getData(response.data)
+function scrapeThread(_chanThreadUrl) {
+    chanThreadUrl = _chanThreadUrl.replace(/\/+$/, ''); // remove trailing slash
+    axios.get(chanThreadUrl).then(response => {
+        getDataFromThread(response.data)
     }).catch(error => {
         console.log(error)
     });
 }
 
-let getData = html => {
+function scrapeBoard(_chanBoardUrl) {
+    chanBoardUrl = _chanBoardUrl.replace(/\/+$/, ''); // remove trailing slash
+    axios.get(chanBoardUrl).then(response => {
+        getDataFromBoard(response.data)
+    }).catch(error => {
+        console.log(error)
+    });
+}
+
+function getDataFromThread(_html) {
     data = [];
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(_html);
     $('a.fileThumb').each((i, elem) => {
+        let href = $(elem).attr('href');
+
         data.push({
-            link: $(elem).attr('href')
+            link: href
         });
 
-        let threadUrl = chanUrl.substr((chanUrl.lastIndexOf('/') + 1));
+        let threadUrl = chanThreadUrl.substr((chanThreadUrl.lastIndexOf('/') + 1));
         fs.mkdir("images/" + threadUrl, {
             recursive: true
         }, (err) => {
@@ -31,11 +42,10 @@ let getData = html => {
 
         axios({
                 method: 'get',
-                url: "https:" + $(elem).attr('href'),
+                url: "https:" + href,
                 responseType: 'stream'
             })
             .then(function(response) {
-                let href = $(elem).attr('href');
                 let extension = href.substr((href.lastIndexOf('.') + 1));
                 let imageName = Math.floor(Math.random() * 1000000000) + '.' + extension;
                 response.data.pipe(fs.createWriteStream("images/" + threadUrl + "/" + imageName))
@@ -43,4 +53,14 @@ let getData = html => {
     });
 }
 
-exports.scrape = scrape;
+function getDataFromBoard(_html) {
+    const $ = cheerio.load(_html + "/catalog");
+    $('img#thumb').each((i, elem) => {
+        //let href = $(elem).attr('href');
+        console.log($(elem).attr('id'));
+        //getDataFromThread("https://boards.4chan.org" + href);
+    });
+}
+
+exports.scrapeThread = scrapeThread;
+exports.scrapeBoard = scrapeBoard;

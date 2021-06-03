@@ -11,16 +11,29 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.use(express.static(__dirname + '/public'));
 
-app.post('/scrapeChan', urlencodedParser, function (request, response) {
-	chanScraper.scrape(request.body.fullUrl);
-	console.log("Downloading 4chan thread (" + request.body.fullUrl + ") ...");
+app.post('/scrapeChanThread', urlencodedParser, function (request, response) {
+    console.log("Downloading 4chan thread (" + request.body.fullUrl + ") ...");
+	chanScraper.scrapeThread(request.body.fullUrl);
+	response.redirect('/');
+	response.end();
+});
+
+app.post('/scrapeChanBoard', urlencodedParser, function (request, response) {
+    console.log("Downloading 4chan board (" + request.body.fullUrl + ") ...");
+	chanScraper.scrapeBoard(request.body.fullUrl);
 	response.redirect('/');
 	response.end();
 });
 
 app.post('/scrapeReddit', urlencodedParser, function (request, response) {
-	redditScraper.scrape(request.body.fullUrl);
-	console.log("Downloading subreddit (" + request.body.fullUrl + ") ...");
+    console.log("Downloading subreddit (" + request.body.fullUrl + ") ...");
+    if (!request.body.fullUrl.includes("reddit.com")) {
+        redditScraper.unlock("https://old.reddit.com/over18?dest=https://old.reddit.com/r/" + request.body.fullUrl + "/");
+        redditScraper.scrape("https://old.reddit.com/r/" + request.body.fullUrl + "/");
+    } else {
+        redditScraper.unlock("https://old.reddit.com/over18?dest=" + request.body.fullUrl);
+        redditScraper.scrape(request.body.fullUrl);
+    }
 	response.redirect('/');
 	response.end();
 });
