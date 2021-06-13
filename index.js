@@ -28,10 +28,10 @@ app.post('/scrapeChanBoard', urlencodedParser, function (request, response) {
 app.post('/scrapeReddit', urlencodedParser, function (request, response) {
     console.log("Downloading subreddit (" + request.body.fullUrl + ") ...");
     if (!request.body.fullUrl.includes("reddit.com")) {
-        redditScraper.unlock("https://old.reddit.com/over18?dest=https://old.reddit.com/r/" + request.body.fullUrl + "/");
+        redditScraper.unlock("https://old.reddit.com/r/" + request.body.fullUrl + "/");
         redditScraper.scrape("https://old.reddit.com/r/" + request.body.fullUrl + "/");
     } else {
-        redditScraper.unlock("https://old.reddit.com/over18?dest=" + request.body.fullUrl);
+        redditScraper.unlock(request.body.fullUrl);
         redditScraper.scrape(request.body.fullUrl);
     }
 	response.redirect('/');

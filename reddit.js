@@ -9,14 +9,13 @@ var redditUrlUnlock = '';
 function unlock(_redditUrlUnlock) {
     redditUrlUnlock = _redditUrlUnlock.replace(/\/+$/, ''); // remove trailing slash
 
-    axios.get(redditUrlUnlock).then(response => {
+    axios.get("https://old.reddit.com/over18?dest=" + redditUrlUnlock).then(response => {
         const {
           window, document, customElements,
           HTMLElement,
           Event, CustomEvent
         } = dom.parseHTML(response.data);
-        const button = document.querySelectorAll("button.c-btn.c-btn-primary")[1];
-        button.click();
+        document.querySelectorAll("button.c-btn.c-btn-primary")[1].click();
     }).catch(error => {
         console.log(error)
     });
@@ -43,9 +42,12 @@ let getData = html => {
         data.push({
             link: dataUrl
         });
+        
+        let date = new Date();
 
         let subUrl = redditUrl.substr((redditUrl.lastIndexOf('/') + 1));
-        fs.mkdir("images/" + subUrl, {
+        let dirPath = "images/" + subUrl + "-" + date.toDateString().toLowerCase().split(' ').join('-');
+        fs.mkdir(dirPath, {
             recursive: true
         }, (err) => {
             if (err) throw err;
@@ -59,7 +61,7 @@ let getData = html => {
             let href = dataUrl;
             let extension = href.substr((href.lastIndexOf('.') + 1));
             let imageName = Math.floor(Math.random() * 1000000000) + '.' + extension;
-            response.data.pipe(fs.createWriteStream("images/" + subUrl + "/" + imageName))
+            response.data.pipe(fs.createWriteStream(dirPath + "/" + imageName))
         }).catch(error => {
             console.log('error: ', error)
         });
